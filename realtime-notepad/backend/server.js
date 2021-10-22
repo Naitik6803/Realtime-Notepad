@@ -1,27 +1,23 @@
-const express = require('express')
-const app = express()
-const server = require('http').Server(app)
-const io = require('socket.io')(server)
+const express = require('express');
+const app = express();
+
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+
 const { ExpressPeerServer } = require('peer')
 const peerServer = ExpressPeerServer(server, {
     debug: true,
 })
-// const { v4: uuidv4 } = require('uuid');
-
 app.use('/peerjs', peerServer)
-// app.use(express.static('public'));
-// app.set('view engine', 'ejs');
-// res.json({ error: err });
 
-app.get('/', (req, res) => {
-    res.send("hello");
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+const path = require('path');
+app.use(express.static(path.join(__dirname, 'public')));
 
-})
-roomId='abc'
-// app.get('/:room', (req, res) => {
-//     res.render('', { roomId: req.params.room })
-// })
+app.use(require('./router/auth'));
 
+roomId='abc';
 io.on('connection', (socket) => {
     socket.on('join-room', (roomId, userId) => {
         socket.join(roomId)
@@ -37,8 +33,12 @@ io.on('connection', (socket) => {
 })
 
 
+const PORT = 5000;
 
+app.get('/', (req, res) => {
+    res.send('terminal running');
+});
 
-const PORT = process.env.PORT || 5000
-
-server.listen(PORT, () => console.log(`Listening on port ${PORT}`))
+app.listen(PORT, () => {
+    console.log(`Server is running at http://127.0.0.1:${PORT}`);
+});
