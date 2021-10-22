@@ -1,0 +1,217 @@
+.main_room_front_page{
+    width: 100vw;
+    min-height: 90vh;
+    height: fit-content;
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+
+
+
+/* for notepad  */
+.Notepad{
+
+    margin: 0;
+    padding: 0;
+    width: 50%;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+.form-group{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.text{
+    /* margin: 8vh 0; */
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.966);
+    resize: none;
+    box-shadow: inset 0 -5px 5px rgba(0,0,0,0.1),
+                0 5px 10px rgba(0,0,0,0.1),
+                0 10px 15px rgba(0,0,0,0.1);
+}
+.onchange_text_loader{
+    position: absolute;
+    top: 92%;
+    left: 15px;
+}
+
+/* file system */
+.main_room_files{
+    position: absolute;
+    left: 0;
+    width: 20%;
+    height: 80vh;
+    top: 5vh;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.main_room_files_add{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+    border-top-right-radius: 10px;
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.34);
+}
+.main_room_files_add h3{
+    font-size: 20px;
+    margin: 0;
+    font-family: 'Rubik', sans-serif;
+    color: rgb(62, 139, 255);
+    margin-left: 10px;
+    padding: 0;
+}
+.main_room_files_add i{
+    color: white;
+    font-size: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.main_room_files_add i:hover{
+    opacity: 0.5;
+}
+.main_room_files_files{
+    width: 100%;
+    height: 90%;
+    border-bottom-right-radius: 10px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.main_room_files_file:nth-child(1){
+    margin-top: 10px;
+}
+.main_room_files_file{
+    cursor: pointer;
+    padding: 5px;
+    margin: 0;
+    width: 100%;
+    height: fit-content;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    color: white;
+}
+.main_room_files_file:hover{
+    background-color: #171515;
+}
+.main_room_files_file h4{
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.main_room_files_chat{
+    position: absolute;
+    left: 80%;
+    width: 20%;
+    height: 80vh;
+    top: 5vh;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.main_room_chat_head{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+    border-top-right-radius: 10px;
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.34);
+}
+.main_room_chat_head h3{
+    font-size: 20px;
+    margin: 0;
+    font-family: 'Rubik', sans-serif;
+    color: rgb(62, 139, 255);
+    margin-right: 10px;
+    padding: 0;
+}
+.main_room_chat_head i{
+    color: white;
+    font-size: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.main_room_chat_head i:hover{
+    opacity: 0.5;
+}
+.main_room_chat_voices{
+    width: 100%;
+    height: 80%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.main_room_chat_foot{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+    border-bottom-left-radius: 10px;
+    border-top: 0.5px solid rgba(255, 255, 255, 0.34);
+    color: white;
+}
+.main_room_chat_foot i{
+    margin: 0 10px;
+    cursor: pointer;
+}
+.main_room_chat_foot i:hover{
+    opacity: 0.5;
+}
+.main_room_chat_user:nth-child(1){
+    margin-top: 10px;
+}
+.main_room_chat_user{
+    cursor: pointer;
+    padding: 5px;
+    margin: 0;
+    width: 100%;
+    height: fit-content;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    color: white;
+}
+.main_room_chat_user:hover{
+    background-color: #171515;
+}
+.main_room_chat_user i{
+    font-size: 15px;
+    color: white;
+    padding: 5px;
+    border-radius: 50%;
+    background-color: black;
+}
+.main_room_chat_user h4{
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}

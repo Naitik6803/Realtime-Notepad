@@ -36,6 +36,14 @@
     margin-right: 20px;
     height: 40px;
 }
+#room-name-exist-or-not{
+    font-size: 10px;
+    font-family: 'Poppins', sans-serif;
+    color: red;
+    margin-top: 5px;
+    opacity: 0;
+    margin-left: 10px;
+}
 .main_room_page_box_div_boxes{
     width: 100vw;
     height: fit-content;
