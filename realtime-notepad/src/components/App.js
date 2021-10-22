@@ -1,16 +1,18 @@
 import '../style/Body.css';
 import MainNav from './Nav';
 import Room from './Rooms/Room';
-import Notepad from './Notepad'
-
+import MainRoom from './MainRoom/MainRoom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 function App() {
   return (
     <div>
-
-      <MainNav/>
-      <Room/>
-      {/* <Notepad/> */}
+    <MainNav/>
+  <Switch>
+    <Route exact path="/" component={Room}/>
+    <Route path="/notepad" component={MainRoom}/>
+    {/* <Route component={Error} /> */}
+  </Switch>
 
     </div>
   );
