@@ -1,0 +1,104 @@
+.main_room_page{
+    width: 100vw;
+    height: fit-content;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background-color: #171515;
+}
+
+.main_room_page_box_div{
+    width: 100vw;
+    height: fit-content;
+    min-height: 90vh;
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.main_room_page_box_div_head{
+    width: 100vw;
+    max-width: 100vw;
+    padding: 5px 0;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.253);
+    justify-content: space-between;
+}
+.main_room_page_box_div_head h1{
+    color: rgb(62, 139, 255);
+    margin-left: 20px;
+    font-weight: 600;
+    font-family: 'Rubik', sans-serif;
+}
+.main_room_page_box_div_head button{
+    margin-right: 20px;
+    height: 40px;
+}
+#modal{
+    /* width: 100vw; */
+}
+.main_room_page_box_div_boxes{
+    width: 100vw;
+    height: fit-content;
+    padding: 5px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.main_room_page_boxes{
+    width: 90%;
+    margin: 15px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    min-height: 70px;
+    height: fit-content;
+    padding: 2px 0;
+    background-color: transparent;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.774);
+    cursor: pointer;
+    color: white;
+    transition: all 200ms ease;
+}
+.main_room_page_boxes:hover{
+    background-color: rgba(255, 255, 255, 0.089);
+}
+.main_room_page_boxes_left{
+    width: 60%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.main_room_page_boxes_left h2{
+    margin-left: 10px;
+    font-size: 25px;
+    font-family: 'Poppins', sans-serif;
+    color: rgba(255, 255, 255, 0.74);
+}
+.main_room_page_boxes_right{
+    width: 40%;
+    display: flex;
+    height: fit-content;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    text-align: right;
+}
+.main_room_page_boxes_right h4{
+    padding: 0;
+    margin: 0;
+    margin-right: 10px;
+    text-align: right;
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.356);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+}
+.main_room_page_boxes_right h4:nth-child(2){
+    margin-top: 4px;
+}
