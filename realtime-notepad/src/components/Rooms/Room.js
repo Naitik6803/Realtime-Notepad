@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import "../../style/room.css";
-
+const socket = io('/')
 const RoomData = [
   {
     name: "one",
@@ -23,6 +23,7 @@ function Room() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const CreateRoom = () => {
+
     setShow(false);
     setRoom([...newRoom, { name: text, member: 0, author: "authorName" }]);
   };
