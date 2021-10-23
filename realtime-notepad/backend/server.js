@@ -15,9 +15,21 @@ app.use(express.urlencoded({ extended: true }));
 const path = require('path');
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(require('./router/auth'));
+const { v4: uuidV4 } = require('uuid')
 
-roomId='abc';
+// app.use(require('./router/auth'));
+app.get('/', (req, res) => {
+    res.redirect(`/${uuidV4()}`)
+})
+
+app.get('/:room', (req, res) => {
+    res.send('room', { roomId: req.params.room })
+})
+
+app.post('/notepad', (req, res) => {
+
+})
+
 io.on('connection', (socket) => {
     socket.on('join-room', (roomId, userId) => {
         socket.join(roomId)

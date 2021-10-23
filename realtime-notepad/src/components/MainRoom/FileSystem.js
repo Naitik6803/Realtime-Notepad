@@ -82,12 +82,12 @@ function FileSystem() {
         </Modal.Footer>
       </Modal>
       <div className="main_room_files_files">
-        {newFile.map((res) => {
-          return (
-            <div className="main_room_files_file">
-              <i class="far fa-file-alt"></i>
-              <h4>{res.name}</h4>
-            </div>
+        {/*{newFile.map((res) => {*/}
+        {/*  return (*/}
+        {/*    <div className="main_room_files_file">*/}
+        {/*      <i class="far fa-file-alt"></i>*/}
+        {/*      <h4>{res.name}</h4>*/}
+        {/*    </div>*/}
           );
         })}
       </div>
