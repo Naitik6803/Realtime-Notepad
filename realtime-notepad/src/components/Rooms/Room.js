@@ -190,7 +190,7 @@ function Room(props) {
             centered
           >
             <Modal.Header closeButton>
-              <Modal.Title>New Room</Modal.Title>
+              <Modal.Title>Join Room</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <div class="mb-3">
