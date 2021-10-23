@@ -17,6 +17,7 @@ const allnames = [
 
 function Room(props) {
   const [show, setShow] = useState(false);
+  const [showjoin,setshowjoin] = useState(false);
   const [text, setText] = useState("");
   const [allRoom, setAllRoom] = useState([]);
   const [load, setload] = useState(true);
@@ -68,6 +69,8 @@ function Room(props) {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const handleCloseJoin = () => setshowjoin(false);
+  const handleShowJoin = () => setshowjoin(true);
 
 
   // setting room 
@@ -120,7 +123,7 @@ function Room(props) {
       for(var i =0;i<allnames.length;i++){
         if(allnames[i].name === joinRoomName){
           alert('join');
-          setShow(false);
+          setshowjoin(false);
           return
         }
       }
@@ -134,10 +137,10 @@ function Room(props) {
         <div className="main_room_page_box_div_head">
           <h1>Rooms</h1>
           <div id="join_new">
-          <Button variant="outline-success" onClick={handleShow}>
+          <Button variant="outline-success" onClick={handleShowJoin}>
             Join Room
           </Button>
-          <Button variant="outline-success" onClick={handleShow}>
+          <Button variant="outline-success" onClick={handleShow} >
             New Room
           </Button>
           </div>
@@ -184,8 +187,8 @@ function Room(props) {
         {/* for joining room  */}
           <Modal
             id="modal"
-            show={show}
-            onHide={handleClose}
+            show={showjoin}
+            onHide={handleCloseJoin}
             aria-labelledby="contained-modal-title-vcenter"
             centered
           >
@@ -207,7 +210,7 @@ function Room(props) {
               </div>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
+              <Button variant="secondary" onClick={handleCloseJoin}>
                 Close
               </Button>
               <Button variant="outline-success" onClick={JoinRoom}>
