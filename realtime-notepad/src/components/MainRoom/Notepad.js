@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
+import { withRouter } from 'react-router-dom';
 import db from '../FireBase';
 
-const Notepad = () => {
+const Notepad = (props) => {
     const [notepadData, setnotepadData] = useState('');
     const [change, setchange] = useState(false);
+    const [editorId, setEditorId] = useState('');
     const [textArea, setTextArea] = useState('');
     const changing = () => {
         if (change) {
@@ -19,8 +21,10 @@ const Notepad = () => {
     };
 
     useEffect(() => {
-        db.collection('data').doc('CbjmNvbK8XN5Nulz2IFB').onSnapshot(snap => {
-            setTextArea(snap.data().message);
+        db.collection('rooms').doc(props.location.state.id).collection('data').onSnapshot(snap => {
+            setEditorId(snap.docs[0]?.id);
+            setTextArea(snap.docs[0]?.data().message);
+            // console.log()
         });
     });
 
@@ -28,9 +32,8 @@ const Notepad = () => {
 
     };
 
-
     const save = async (data) => {
-        db.collection('data').doc('CbjmNvbK8XN5Nulz2IFB').update({
+        db.collection('rooms').doc(props.location.state.id).collection('data').doc(editorId).update({
             message: data,
         }).then(() => {
             console.log('updated');
@@ -67,4 +70,4 @@ const Notepad = () => {
     );
 };
 
-export default Notepad;
+export default withRouter(Notepad);
