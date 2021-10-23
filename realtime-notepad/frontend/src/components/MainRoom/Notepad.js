@@ -21,9 +21,9 @@ const Notepad = (props) => {
     };
 
     useEffect(() => {
-        db.collection('rooms').doc(props.location.state.id).collection('data').onSnapshot(snap => {
+        db.collection('rooms').doc(props.location.state.id).collection("files").doc(props.fileId).collection('data').onSnapshot(snap => {
             setEditorId(snap.docs[0]?.id);
-            setTextArea(snap.docs[0]?.data().message);
+            setTextArea(snap.docs[0]?.data()?.message);
             // console.log()
         });
     });
@@ -33,7 +33,7 @@ const Notepad = (props) => {
     };
 
     const save = async (data) => {
-        db.collection('rooms').doc(props.location.state.id).collection('data').doc(editorId).update({
+        db.collection('rooms').doc(props.location.state.id).collection("files").doc(props.fileId).collection('data').doc(editorId).update({
             message: data,
         }).then(() => {
             console.log('updated');
