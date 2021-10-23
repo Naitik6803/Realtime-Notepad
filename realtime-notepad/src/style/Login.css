@@ -1,0 +1,79 @@
+.login_page{
+    width: 100vw;
+    height: 100vh;
+    background: #171515;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+#alert_mssg{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+}
+.login_component{
+    width: 40%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    background-color: #e7e7e7;
+}
+
+.login{
+    width: 80%;
+    /* margin: 0 25px; */
+    padding: 10px 0;
+    border-bottom: solid 1px rgba(0,0,0,0.4);
+}
+.signup{
+    width: 80%;
+    /* margin: 0 25px; */
+    padding: 10px 0;
+    border-bottom: solid 1px rgba(0,0,0,0.4);
+}
+
+.login_form{
+    display: none;
+}
+.login_form.active{
+    display: block;
+    animation: display 1s;
+}
+
+@keyframes display {
+    from {clip-path: polygon(0 0, 100% 0, 100% 0, 0 0)}
+    to {clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%)}
+}
+
+.option{
+    font-weight: bolder;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.option span{
+    color: #565656;
+}
+
+/* #btn{
+    background: #161624;
+    width: 100%;
+}
+#btn:hover{
+    background: #161624;
+} */
+
+@media only screen and (max-width: 800px){
+    .login_component{
+        width: 60%;
+    }
+}
+@media only screen and (max-width: 500px){
+    .login_component{
+        width: 80%;
+    }
+}
