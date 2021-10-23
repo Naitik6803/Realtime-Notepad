@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import "../../style/room.css";
-const socket = io('/')
+// import io from 'socket.io'
+// const socket = io('/')
 const RoomData = [
   {
     name: "one",

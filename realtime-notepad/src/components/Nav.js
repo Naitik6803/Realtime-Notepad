@@ -22,8 +22,9 @@ function MainNav() {
               navbarScroll
             >
               <Nav.Link href="#action1">Home</Nav.Link>
-              <Nav.Link href="#action2" target="_blank">
-                Github
+              {/* <Nav.Link href="#action2" target="_blank"> */}
+              <Nav.Link to="login">
+                Login
               </Nav.Link>
             </Nav>
             <Form className="d-flex">
