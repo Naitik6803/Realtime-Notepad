@@ -23,11 +23,30 @@ function Room() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const CreateRoom = () => {
+  const SettingRoom = (e) => {
+    setText(e.target.value);
+  };
 
+  const CreateRoom = () => {
+      let p = false;
+    for(var i = 0 ;i<newRoom.length;i++){
+        if(text.toLowerCase()===newRoom[i].name.toLowerCase()){
+            p = true;
+            break;
+        }
+        else{
+            p = false;
+        }        
+    }
+    if(!p){
     setShow(false);
     setRoom([...newRoom, { name: text, member: 0, author: "authorName" }]);
+    }
+    else{
+            document.getElementById('room-name-exist-or-not').style.opacity = 1;    
+    }
   };
+
   return (
     <div className="main_room_page">
       <div className="main_room_page_box_div">
@@ -38,7 +57,7 @@ function Room() {
           </Button>
 
           <Modal
-            id = "modal"
+            id="modal"
             show={show}
             onHide={handleClose}
             aria-labelledby="contained-modal-title-vcenter"
@@ -56,8 +75,9 @@ function Room() {
                   type="text"
                   class="form-control"
                   id="recipient-name"
-                  onChange={(e) => setText(e.target.value)}
+                  onChange={(e) => SettingRoom(e)}
                 />
+                <h5 id="room-name-exist-or-not">Room name already exists..</h5>
               </div>
             </Modal.Body>
             <Modal.Footer>
