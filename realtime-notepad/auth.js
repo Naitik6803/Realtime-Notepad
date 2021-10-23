@@ -18,4 +18,3 @@ router.post('/text', (req, res) => {
 });
 
 module.exports = router;
-
