@@ -1,19 +1,19 @@
-import '../style/Body.css';
-import MainNav from './Nav';
-import Room from './Rooms/Room';
-import MainRoom from './MainRoom/MainRoom';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import "../style/Body.css";
+import MainNav from "./Nav";
+import Room from "./Rooms/Room";
+import MainRoom from "./MainRoom/MainRoom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Register from "./Login-Signup/Register";
 
 function App() {
   return (
     <div>
-    <MainNav/>
-  <Switch>
-    <Route exact path="/" component={Room}/>
-    <Route path="/notepad" component={MainRoom}/>
-    {/* <Route component={Error} /> */}
-  </Switch>
-
+      <Switch>
+        <Route exact path="/" component={Register} />
+        <Route path="/notepad" component={MainRoom} />
+        <Route path="/home" component={Room} />
+        {/* <Route component={Error} /> */}
+      </Switch>
     </div>
   );
 }
