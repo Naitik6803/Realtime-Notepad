@@ -1,48 +1,57 @@
-import React, { useState } from "react";
-import {Button} from 'react-bootstrap';
+import React, { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 const users = [
   {
-    name: 'hetu',
+    name: "hetu",
   },
   {
-    name: 'zaid',
+    name: "zaid",
   },
   {
-    name: 'mohit',
+    name: "mohit",
   },
   {
-    name: 'naitik',
+    name: "naitik",
   },
 ];
+let muted;
 function MainChat() {
-
-    const [mute,setmute] = useState(true);
-    const [defen,setdefen] = useState(false);
-  const DefenOrNot = () =>{
-    if(defen){
-        return(
-            <i class="fas fa-volume-mute" onClick={()=>setdefen(!defen)}></i>
-        )
+  const [mute, setmute] = useState(true);
+  const [defen, setdefen] = useState(false);
+  const DefenOrNot = () => {
+    if (defen) {
+      return <i class="fas fa-volume-mute"></i>;
+    } else {
+      return <i class="fas fa-volume-up"></i>;
     }
-    else{
-        return(
-            <i class="fas fa-volume-up" onClick={()=>setdefen(!defen)}></i>
-        )
-    }
-  }  
+  };
 
-  const MuteOrUnmute = ( ) =>{
+  const MuteOrUnmute = () => {
+    if (mute) {
+      return <i class="fas fa-microphone-slash"></i>;
+    } else {
+      return <i class="fas fa-microphone"></i>;
+    }
+  };
+  // useEffect(()=>{
+  //   navigator.mediaDevices
+  //   .getUserMedia({
+  //     video: false,
+  //     audio: true,
+  //   })
+  // },[])
+  useEffect(()=>{
     if(mute){
-        return(
-            <i class="fas fa-microphone-slash" onClick={()=>setmute(!mute)}></i>
-        )
+      navigator.mediaDevices.getUserMedia({audio: true}).then(res=>{
+        res.getAudioTracks()[0].enabled = false;
+      })
     }
     else{
-        return(
-            <i class="fas fa-microphone" onClick={()=>setmute(!mute)}></i>
-        )
+      navigator.mediaDevices.getUserMedia({audio: true}).then(res=>{
+        res.getAudioTracks()[0].enabled = true;
+      })
     }
-  }
+  })
   return (
     <div className="main_room_files_chat bg-dark">
       <div className="main_room_chat_head">
@@ -53,19 +62,15 @@ function MainChat() {
         {users.map((res) => {
           return (
             <div className="main_room_chat_user">
-            <i class="fas fa-phone-volume"></i>
+              <i class="fas fa-phone-volume"></i>
               <h4>{res.name}</h4>
             </div>
           );
         })}
       </div>
       <div className="main_room_chat_foot">
-          {
-              MuteOrUnmute()
-          }
-          {
-              DefenOrNot()
-          }
+        <div onClick={() => setmute(!mute)}>{MuteOrUnmute()}</div>
+        <div onClick={() => setdefen(!defen)}>{DefenOrNot()}</div>
       </div>
     </div>
   );

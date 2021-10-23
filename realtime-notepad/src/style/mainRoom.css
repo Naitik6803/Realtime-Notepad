@@ -176,13 +176,21 @@
     border-top: 0.5px solid rgba(255, 255, 255, 0.34);
     color: white;
 }
-.main_room_chat_foot i{
-    margin: 0 10px;
+.main_room_chat_foot div{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #171515;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
+    margin: 0 5px;
 }
-.main_room_chat_foot i:hover{
-    opacity: 0.5;
+.main_room_chat_foot div:hover{
+    opacity: 0.7;
 }
+
 .main_room_chat_user:nth-child(1){
     margin-top: 10px;
 }
