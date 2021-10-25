@@ -10,7 +10,7 @@ function App() {
     <div>
       <Switch>
         <Route exact path="/" component={Register} />
-        <Route path="/notepad" component={MainRoom} />
+        <Route path="/notepad/:userId" component={MainRoom} />
         <Route path="/home" component={Room} />
         {/* <Route component={Error} /> */}
       </Switch>

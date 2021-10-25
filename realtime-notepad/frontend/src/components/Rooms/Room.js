@@ -27,7 +27,7 @@ function Room (props) {
     const redirectEditor = async (res) => {
         console.log(res.id);
         let fileId;
-        props.history.push({ pathname: '/notepad', state: { id: res.id } });
+        props.history.push({ pathname: `/notepad/${res.id}`, state: { id: res.id } });
         await fetch('/notepad', {
             method: 'POST',
             headers: {

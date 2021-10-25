@@ -11,9 +11,9 @@ function VoiceRoom(props) {
   myVideo.muted = true;
 
   let peer = new Peer(undefined, {
-    path: "/peerjs",
-    host: `/`,
-    port: "5000",
+    key: "peerjs",
+    debug: 2,
+    secure: process.env.REACT_APP_ENV === "PRODUCTION" ? true : false, // secure : false for http connection
   });
 
   const [myVideoStream, setVideoStream] = useState();
