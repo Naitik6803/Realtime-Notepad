@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Alert } from "react-bootstrap";
 import "../../style/Login.css";
+import { withRouter } from "react-router-dom";
 
 const loginData = [
   {
@@ -15,7 +16,7 @@ const signupdata = [
   },
 ];
 
-const Register = () => {
+const Register = (props) => {
   const [login, setlogin] = useState("active");
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -25,20 +26,17 @@ const Register = () => {
   const [alert, setalert] = useState(false);
   const [alertmssg, setalertmssg] = useState("");
 
-  const showalert = () =>{
-      if(alert){
-          return(
-            <Alert variant="warning" id="alert_mssg">
-            {alertmssg}
-            </Alert>
-          )
-      }
-      else{
-          return(
-              <></>
-          )
-      }
-  }
+  const showalert = () => {
+    if (alert) {
+      return (
+        <Alert variant="warning" id="alert_mssg">
+          {alertmssg}
+        </Alert>
+      );
+    } else {
+      return <></>;
+    }
+  };
 
   const dislogin = () => {
     if (login === "none") {
@@ -84,33 +82,33 @@ const Register = () => {
   const userLogin = (e) => {
     e.preventDefault();
     if (loginCheck()) {
-        setalertmssg('User name and password not maching');
-        setalert(true);
+      setalertmssg("User name and password not maching");
+      setalert(true);
     } else {
-        setalertmssg('You can go further');
-        setalert(true);
+      setalertmssg("You can go further");
+      props.history.push("/home");
+      setalert(true);
     }
   };
 
   const userSignup = (e) => {
     e.preventDefault();
     if (passwordcheck()) {
-        setalertmssg('Password not maching');
-        setalert(true);
+      setalertmssg("Password not maching");
+      setalert(true);
     } else if (signupCheck()) {
-        setalertmssg('username already exists');
-        setalert(true);
+      setalertmssg("username already exists");
+      setalert(true);
     } else {
-        setalertmssg('You can go further');
-        setalert(true);
+      setalertmssg("You can go further");
+      props.history.push("/home");
+      setalert(true);
     }
   };
 
   return (
     <div className="login_page">
-    {
-        showalert()
-    }
+      {showalert()}
       <div className="login_component">
         <div className="login">
           <div className="login_op option" onClick={dislogin}>
@@ -203,4 +201,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default withRouter(Register);

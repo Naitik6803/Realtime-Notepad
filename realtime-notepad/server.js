@@ -1,38 +1,40 @@
-const app = require("express")();
+const express = require("express");
+const app = express();
 const server = require("http").createServer(app);
 const cors = require("cors");
-const {log} = require("nodemon/lib/utils");
+const { log } = require("nodemon/lib/utils");
+const { ExpressPeerServer } = require("peer");
 
-const io = require("socket.io")(server, {
-    cors: {
-        origin: "*",
-        methods: [ "GET", "POST" ]
-    }
+const peerServer = ExpressPeerServer(server, {
+  debug: true,
 });
 
 app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+  },
+});
+
+app.use("/peerjs", peerServer);
 
 const PORT = process.env.PORT || 5000;
 
-app.get('/',(req,res)=>{
-    res.send('Server is running');
+app.get("/", (req, res) => {
+  res.send("Server is running");
 });
 
 io.on("connection", (socket) => {
-    socket.emit("me", socket.id);
-
-    socket.on("disconnect", () => {
-        socket.broadcast.emit("callEnded")
-    });
-
-    socket.on("callUser", ({ userToCall, signalData, from, name }) => {
-        io.to(userToCall).emit("callUser", { signal: signalData, from, name });
-    });
-
-    socket.on("answerCall", (data) => {
-        io.to(data.to).emit("callAccepted", data.signal)
-    });
+  console.log("ready to use");
+  socket.on("join-room", (roomId, userId) => {
+    console.log("joined");
+    socket.join(roomId);
+    socket.broadcast.to(roomId).emit("user-connected", userId);
+  });
 });
 
-
-server.listen(PORT,()=> console.log(`Server is running on port ${PORT}`));
+server.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
