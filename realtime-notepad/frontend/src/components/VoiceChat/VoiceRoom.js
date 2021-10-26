@@ -5,15 +5,28 @@ import { useEffect, useState } from "react";
 const socket = io("/");
 
 function VoiceRoom(props) {
-  const [roomId, setRoomId] = useState("");
-
   const myVideo = document.createElement("video");
   myVideo.muted = true;
 
   let peer = new Peer(undefined, {
-    path: "/peerjs",
-    host: `/`,
-    port: "5000",
+    key: "peerjs",
+    debug: 2,
+    secure: process.env.REACT_APP_ENV === "PRODUCTION" ? true : false, // secure : false for http connection
+  });
+
+  // window.onbeforeunload = function (e) {
+  //   socket.disconnect();
+  // };
+
+  useEffect(() => {
+    window.onpopstate = (e) => {
+      socket.close();
+      console.log("socket disconnect should fire.");
+    };
+  });
+
+  socket.on("disconnect", () => {
+    socket.open();
   });
 
   const [myVideoStream, setVideoStream] = useState();
@@ -38,8 +51,15 @@ function VoiceRoom(props) {
         });
 
         socket.on("user-connected", (userId) => {
-          console.log("user");
+          console.log("user joined", userId);
           connectToNewUser(userId, stream);
+        });
+
+        socket.on("user-disconnected", (userId) => {
+          console.log("user left", userId);
+          if (peers[userId]) {
+            peers[userId].close();
+          }
         });
       });
 
@@ -49,6 +69,8 @@ function VoiceRoom(props) {
     });
   }, []);
 
+  const peers = {};
+
   const connectToNewUser = (userId, stream) => {
     console.log(userId);
     const call = peer.call(userId, stream);
@@ -56,6 +78,7 @@ function VoiceRoom(props) {
     call.on("stream", (userVideoStream) => {
       addVideoStream(video, userVideoStream);
     });
+    peers[userId] = call;
   };
 
   const addVideoStream = (video, stream) => {
