@@ -3,21 +3,6 @@ import { Button, Modal } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import db from '../FireBase';
 
-const filename = [
-    {
-        name: 'hetu.txt',
-    },
-    {
-        name: 'zaid.txt',
-    },
-    {
-        name: 'mohit.txt',
-    },
-    {
-        name: 'naitik.txt',
-    },
-];
-
 function FileSystem (props) {
     const [show, setShow] = useState(false);
     const [text, setText] = useState('');
@@ -27,12 +12,28 @@ function FileSystem (props) {
     const handleShow = () => setShow(true);
 
     const CreateFile = () => {
-        let p = false;
-
+        console.log('new file');
+        console.log(text);
+        db.collection('rooms').doc(props.location.state.id).collection('files').add({
+            fileName: text,
+        }).then((f) => {
+            console.log(f.id);
+            db.collection('rooms').doc(props.location.state.id).collection('files').doc(f.id).collection('data').add({
+                message: '',
+            }).then(() => {
+                props.history.push({
+                    pathname: `/notepad/${props.location.state.id}`,
+                    state: { id:props.location.state.id,fileId: f.id },
+                });
+            });
+        });
     };
 
     const redirectFile = (res) => {
-        props.history.push({ pathname: '/notepad', state: { id: props.location.state.id, fileId: res.id } });
+        props.history.push({
+            pathname: `/notepad/${props.location.state.id}`,
+            state: { id: props.location.state.id, fileId: res.id },
+        });
     };
 
     useEffect(() => {
@@ -47,7 +48,7 @@ function FileSystem (props) {
             });
             setAllFile(smallData);
         });
-    });
+    }, []);
 
     return (
         <div className = "main_room_files bg-dark">
@@ -66,14 +67,15 @@ function FileSystem (props) {
                     <Modal.Title>New filename</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div class = "mb-3">
-                        <label for = "recipient-name" class = "col-form-label">
+                    <div className = "mb-3">
+                        <label for = "recipient-name" className = "col-form-label">
                             Name of File:
                         </label>
                         <input
                             type = "text"
-                            class = "form-control"
+                            className = "form-control"
                             id = "recipient-name"
+                            value = {text}
                             onChange = {(e) => setText(e.target.value)}
                         />
                         <h5 id = "room-name-exist-or-not">Room name already exists..</h5>
@@ -92,7 +94,7 @@ function FileSystem (props) {
                 {allFiles.map((res) => {
                     return (
                         <div onClick = {() => redirectFile(res)} className = "main_room_files_file">
-                            <i class = "far fa-file-alt"></i>
+                            <i className = "far fa-file-alt"/>
                             <h4>{res.name}</h4>
                         </div>
                     );

@@ -27,16 +27,23 @@ function Room (props) {
     const redirectEditor = async (res) => {
         console.log(res.id);
         let fileId;
-        props.history.push({ pathname: `/notepad/${res.id}`, state: { id: res.id } });
-        await fetch('/notepad', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json',
-            },
-            body: JSON.stringify({
-                roomId: res.id,
-            }),
+        const data = await new Promise((resolve, reject) => {
+            db.collection('rooms').doc(res.id).collection('files').onSnapshot(snap => {
+                fileId = snap.docs[0]?.id;
+                resolve(true);
+            });
+        }).then(() => {
+            props.history.push({ pathname: `/notepad/${res.id}`, state: { id: res.id, fileId: fileId } });
         });
+        // await fetch('/notepad', {
+        //     method: 'POST',
+        //     headers: {
+        //         'content-type': 'application/json',
+        //     },
+        //     body: JSON.stringify({
+        //         roomId: res.id,
+        //     }),
+        // });
     };
     const loader = () => {
         if (load) {
@@ -113,6 +120,8 @@ function Room (props) {
                 }).then((file) => {
                     db.collection('rooms').doc(c.id).collection('files').doc(file.id).collection('data').add({
                         message: '',
+                    }).then(() => {
+                        props.history.push({ pathname: `/notepad/${c.id}`, state: { id: c.id, fileId: file.id } });
                     });
                 });
 
