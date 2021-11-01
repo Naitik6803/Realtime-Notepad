@@ -9,7 +9,7 @@ function Notepad(props) {
 
   useEffect(() => {
     db.collection("rooms")
-      .doc(props.location.state.id)
+      .doc(props.id)
       .collection("files")
       .doc(props.fileId)
       .collection("data")
@@ -18,12 +18,12 @@ function Notepad(props) {
         setTextArea(snap.docs[0]?.data()?.message);
         console.log("updated");
       });
-  }, []);
+  }, [props.fileId]);
 
   const handleChange = (data) => {
     setTextArea(data);
     db.collection("rooms")
-      .doc(props.location.state.id)
+      .doc(props.id)
       .collection("files")
       .doc(props.fileId)
       .collection("data")
@@ -41,8 +41,9 @@ function Notepad(props) {
 
   return (
     <div>
-      <VoiceRoom roomId={props.location.state.id} />
+      <VoiceRoom roomId={props.id} />
       <textarea
+        style={{ height: "400px", width: "500px" }}
         value={textArea}
         onChange={(e) => handleChange(e.target.value)}
       />
